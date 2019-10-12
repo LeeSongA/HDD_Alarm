@@ -14,6 +14,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Switch simpleSwitch = (Switch)findViewById((R.id.simpleSwitch));
+        simpleSwitch.setChecked(true);
+
+        final Boolean switchState = simpleSwitch.isChecked();
+
 
         // 앞서 설정한 값으로 보여주기
         // 없으면 디폴트 값은 현재시간
@@ -44,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"[처음 실행시] 다음 알람은 " + date_text + "으로 알람이 설정되었습니다!", Toast.LENGTH_SHORT).show();
 
 
-        Button btn1 = (Button) findViewById(R.id.btn1);
+        final Button btn1 = (Button) findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
 
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 8,8);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 14,00);
                 calendar.set(Calendar.SECOND, 0);
-                calendar.add(Calendar.DATE, 0);
+                calendar.add(Calendar.DATE, 7);
 
                 Date currentDateTime = calendar.getTime();
                 String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일 a hh시 mm분 ", Locale.getDefault()).format(currentDateTime);
@@ -70,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Button btn2 = (Button) findViewById(R.id.btn2);
+        final Button btn2 = (Button) findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg1) {
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Button btn4 = (Button) findViewById(R.id.btn4);
+        final Button btn4 = (Button) findViewById(R.id.btn4);
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg2) {
@@ -122,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Button btn_test = (Button) findViewById(R.id.btn_test);
+        final Button btn_test = (Button) findViewById(R.id.btn_test);
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg2) {
@@ -143,6 +150,27 @@ public class MainActivity extends AppCompatActivity {
                 diaryNotification(calendar);
             }
 
+        });
+
+        btn1.setVisibility(View.VISIBLE);
+        btn2.setVisibility(View.VISIBLE);
+        btn4.setVisibility(View.VISIBLE);
+        btn_test.setVisibility(View.VISIBLE);
+        simpleSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(simpleSwitch.isChecked()) {
+                    btn1.setVisibility(View.VISIBLE);
+                    btn2.setVisibility(View.VISIBLE);
+                    btn4.setVisibility(View.VISIBLE);
+                    btn_test.setVisibility(View.VISIBLE);
+                } else {
+                    btn1.setVisibility(View.GONE);
+                    btn2.setVisibility(View.GONE);
+                    btn4.setVisibility(View.GONE);
+                    btn_test.setVisibility(View.GONE);
+                }
+            }
         });
     }
 
