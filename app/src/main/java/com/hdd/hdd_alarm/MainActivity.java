@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 14,00);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 8,8);
                 calendar.set(Calendar.SECOND, 0);
-                calendar.add(Calendar.DATE, 7);
+                calendar.add(Calendar.DATE, 0);
 
                 Date currentDateTime = calendar.getTime();
                 String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일 a hh시 mm분 ", Locale.getDefault()).format(currentDateTime);
@@ -106,6 +106,29 @@ public class MainActivity extends AppCompatActivity {
                 calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 14,00);
                 calendar.set(Calendar.SECOND, 0);
                 calendar.add(Calendar.DATE, 28);
+
+                Date currentDateTime = calendar.getTime();
+                String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일 a hh시 mm분 ", Locale.getDefault()).format(currentDateTime);
+                Toast.makeText(getApplicationContext(),"알림 설정:"+ date_text + "으로 알람이 설정되었습니다!", Toast.LENGTH_SHORT).show();
+
+                //  Preference에 설정한 값 저장
+                SharedPreferences.Editor editor = getSharedPreferences("daily alarm", MODE_PRIVATE).edit();
+                editor.putLong("nextNotifyTime", (long)calendar.getTimeInMillis());
+                editor.apply();
+
+
+                diaryNotification(calendar);
+            }
+
+        });
+
+        Button btn_test = (Button) findViewById(R.id.btn_test);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg2) {
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
 
                 Date currentDateTime = calendar.getTime();
                 String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일 a hh시 mm분 ", Locale.getDefault()).format(currentDateTime);

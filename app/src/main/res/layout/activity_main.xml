@@ -54,8 +54,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginBottom="1dp"
         android:background="#FFFFFF"
         android:text="4주일"
+        android:textSize="18sp"
+        android:gravity="left" />
+
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:text="Test-Now"
         android:textSize="18sp"
         android:gravity="left" />
 
